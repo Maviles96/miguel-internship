@@ -44,6 +44,7 @@ const HotCollections = () => {
 
         const data = await response.json();
         setCollections(data);
+         setLoading(false);
       } catch (err) {
         setError(err.message);
       } finally {
