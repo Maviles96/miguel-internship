@@ -7,6 +7,32 @@ const ExploreItems = () => {
    const [explore, setExplore] = useState([]);
    const [visibleCount, setVisibleCount] = useState(8);
    const ITEMS_PER_PAGE = 4;
+   const items = [
+  { id: 1, price: 1.74, likes: 69 },
+  { id: 2, price: 0.85, likes: 42 },
+  { id: 3, price: 2.1, likes: 90 },
+];
+const [displayedItems, setDisplayedItems] = useState(items);
+
+function filterItems(filter) {
+  const sortedItems = [...items];
+
+  if (filter === "price_low_to_high") {
+    sortedItems.sort((a, b) => a.price - b.price);
+  }
+
+  if (filter === "price_high_to_low") {
+    sortedItems.sort((a, b) => b.price - a.price);
+  }
+
+  setDisplayedItems(sortedItems);
+}
+
+<select
+  id="filter-items"
+  defaultValue=""
+  onChange={(event) => filterItems(event.target.value)}
+></select>
 
    const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
