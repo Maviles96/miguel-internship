@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const HotCollections = () => {
@@ -12,39 +12,51 @@ const HotCollections = () => {
   const [error, setError] = useState(null);
 
   function ProfileCard({ isLoading, data }) {
-    if( isLoading ) {
+    if (isLoading) {
       return (
         <div className="card">
           <Skeleton circle width={50} height={50} />
-          <h2><Skeleton width={150} /></h2>
-          <p><Skeleton count={3} /></p>
+          <h2>
+            <Skeleton width={150} />
+          </h2>
+          <p>
+            <Skeleton count={3} />
+          </p>
         </div>
       );
     }
 
-     return (
-    <div className="card">
-      <img src={data.avatar} alt={data.name} style={{ width: 50, height: 50, borderRadius: '50%' }} />
-      <h2>{data.name}</h2>
-      <p>{data.bio}</p>
-    </div>
-     );
+    return (
+      <div className="card">
+        <img
+          src={data.avatar}
+          alt={data.name}
+          style={{ width: 50, height: 50, borderRadius: "50%" }}
+        />
+        <h2>{data.name}</h2>
+        <p>{data.bio}</p>
+      </div>
+    );
   }
 
   useEffect(() => {
     const fetchCollections = async () => {
       try {
         const response = await fetch(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
         );
 
         if (!response.ok) {
           throw new Error("Failed to fetch collections");
         }
-
         const data = await response.json();
-        setCollections(data);
-         setLoading(false);
+        const collectionItems = Array.isArray(data) ? data : data.value;
+
+        if (!Array.isArray(collectionItems)) {
+          throw new Error("Invalid collections response");
+        }
+
+        setCollections(collectionItems);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -79,9 +91,10 @@ const HotCollections = () => {
   };
 
   if (loading) {
-  return <ProfileCard isLoading={true} />;
-}
+    return <ProfileCard isLoading={true} />;
+  }
   if (error) return <div>Error: {error}</div>;
+  if (collections.length === 0) return null;
 
   return (
     <section id="section-collections" className="no-bottom">
@@ -133,4 +146,4 @@ const HotCollections = () => {
   );
 };
 
-export default HotCollections; 
+export default HotCollections;
