@@ -4,6 +4,77 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
+   const [explore, setExplore] = useState([]);
+   const [visibleCount, setVisibleCount] = useState(8);
+   const ITEMS_PER_PAGE = 4;
+
+   const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
+  };
+
+useEffect(() => {
+
+ const fetchExploreItems = async () => {
+  
+ const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/explore");
+ const data = await response.json();
+
+  console.log(data);
+  
+  setExplore(data);
+  
+  };
+  
+  fetchExploreItems();
+  }, []);
+
+  // Slider Settings
+    const sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: { slidesToShow: 3 },
+        },
+        {
+          breakpoint: 768,
+          settings: { slidesToShow: 2 },
+        },
+        {
+          breakpoint: 576,
+          settings: { slidesToShow: 1 },
+        },
+      ],
+    }
+
+
+  
+  function ProfileCard({ isLoading, data }) {
+    if( isLoading ) {
+      return (
+        <div className="card">
+        <Skeleton circle width={50} height={50} />
+        <h2><Skeleton width={150} /></h2>
+        <p><Skeleton count={3} /></p>
+        </div>
+      );
+    };
+
+    return (
+  <div className="card">
+<img src={data.authorImage} alt={data.authorName} style={{width: 50, height: 50, borderRadius: '50%'}} />
+<h2>{data.authorName}</h2>
+<p>{data.price} ETH</p>
+</div>
+);
+} 
+
+  const visibleItems = explore.slice(0, visibleCount);
+
   return (
     <>
       <div>
@@ -14,7 +85,7 @@ const ExploreItems = () => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {new Array(8).fill(0).map((_, index) => (
+       {visibleItems.map((item, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -69,9 +140,9 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
-          Load more
-        </Link>
+         <button onClick={handleLoadMore} style={{ padding: '10px 20px', cursor: 'pointer'}}>
+   Load More 
+    </button>
       </div>
     </>
   );

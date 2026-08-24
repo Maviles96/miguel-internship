@@ -51,20 +51,20 @@ fetchTopSellers();
 function ProfileCard({ isLoading, data }) {
   if( isLoading ) {
     return (
-    <div className="card">
+      <div className="card">
       <Skeleton circle width={50} height={50} />
       <h2><Skeleton width={150} /></h2>
       <p><Skeleton count={3} /></p>
-    </div>
+      </div>
     );
   }
 
 return (
   <div className="card">
-  <img src={data.avatar} alt={data.name} style={{ width: 50, height: 50, borderRadius: '50%'}} />
-  <h2>{data.name}</h2>
-  <p>{data.bio}</p>
-  </div> 
+<img src={data.authorImage} alt={data.authorName} style={{width: 50, height: 50, borderRadius: '50%'}} />
+<h2>{data.authorName}</h2>
+<p>{data.price} ETH</p>
+</div>
 );
 } 
 
