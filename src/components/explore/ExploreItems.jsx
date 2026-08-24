@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
@@ -7,15 +7,9 @@ const ExploreItems = () => {
    const [explore, setExplore] = useState([]);
    const [visibleCount, setVisibleCount] = useState(8);
    const ITEMS_PER_PAGE = 4;
-   const items = [
-  { id: 1, price: 1.74, likes: 69 },
-  { id: 2, price: 0.85, likes: 42 },
-  { id: 3, price: 2.1, likes: 90 },
-];
-const [displayedItems, setDisplayedItems] = useState(items);
 
 function filterItems(filter) {
-  const sortedItems = [...items];
+  const sortedItems = [...explore];
 
   if (filter === "price_low_to_high") {
     sortedItems.sort((a, b) => a.price - b.price);
@@ -25,14 +19,8 @@ function filterItems(filter) {
     sortedItems.sort((a, b) => b.price - a.price);
   }
 
-  setDisplayedItems(sortedItems);
-}
-
-<select
-  id="filter-items"
-  defaultValue=""
-  onChange={(event) => filterItems(event.target.value)}
-></select>
+  setExplore(sortedItems);
+} 
 
    const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE);
@@ -104,7 +92,9 @@ useEffect(() => {
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select id="filter-items" defaultValue=""
+        onChange={(event) => filterItems (event.target.value)}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -156,7 +146,7 @@ useEffect(() => {
               <Link to="/item-details">
                 <h4>Pinky Ocean</h4>
               </Link>
-              <div className="nft__item_price">1.74 ETH</div>
+              <div className="nft__item_price">{item.price} ETH</div>
               <div className="nft__item_like">
                 <i className="fa fa-heart"></i>
                 <span>69</span>
