@@ -5,6 +5,37 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 
 const Author = () => {
+
+ const [author, setAuthor] = useState([]);
+useEffect(() => {
+
+  function handleFollow() {
+  setIsFollowing(!isFollowing);
+} 
+
+<button onClick={handleFollow}>
+  {isFollowing ? "Unfollow" : "Follow"}
+</button>
+
+const [isFollowing, setIsFollowing] = useState(false);
+
+const fetchAuthor = async () => {
+
+const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012");
+
+const data = await response.json();
+
+console.log(data);
+
+setAuthor(data);
+
+};
+
+fetchAuthor();
+
+}, []);
+
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
