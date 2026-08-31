@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import { useEffect, useState } from "react";
@@ -7,18 +7,21 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const TopSellers = () => {
   const [sellers, setSellers] = useState([]);
-useEffect(() => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
 
 const fetchTopSellers = async () => {
-
+try {
 const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers");
 
 const data = await response.json();
-
-console.log(data);
-
-setSellers(data);
-
+setSellers(data); 
+} catch (error) {
+  console.error("Error fetching sellers:", error);
+} finally {
+  setLoading(false);
+} 
 };
 
 fetchTopSellers();
@@ -61,7 +64,7 @@ function ProfileCard({ isLoading, data }) {
 
 return (
   <div className="card">
-<img src={data.authorImage} alt={data.authorName} style={{width: 50, height: 50, borderRadius: '50%'}} />
+<img src={data.authorImage} alt={data.authorName} style={{width: "50px", height: "50px", minWidth: "50px", minHeight: "50px", borderRadius: "50%", ojectFit: "cover", display: "inline-block", }} />
 <h2>{data.authorName}</h2>
 <p>{data.price} ETH</p>
 </div>
