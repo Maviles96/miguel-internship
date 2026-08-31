@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import nftImage from "../../images/nftImage.jpg"; 
+import AuthorImage from "../components/ui/AuthorImage";
 
 const AuthorItems = () => {
   return (

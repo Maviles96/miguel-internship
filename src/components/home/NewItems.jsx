@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Slider from "react-slick";
-import AuthorImage from "../../images/author_thumbnail.jpg";
+import { Link } from "react-router-dom"; 
 import nftImage from "../../images/nftImage.jpg";
 import Skeleton from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
@@ -24,50 +22,7 @@ setItems(data);
 
 fetchNewItems();
 
-}, []);
-
-// Slider Settings
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 576,
-        settings: { slidesToShow: 1 },
-      },
-    ],
-  };
-
-function ProfileCard({ isLoading, data }) {
-  if( isLoading ) {
-    return (
-    <div className="card">
-      <Skeleton circle width={50} height={50} />
-      <h2><Skeleton width={150} /></h2>
-      <p><Skeleton count={3} /></p>
-    </div>
-    );
-  }
-
-return (
-  <div className="card">
-  <img src={data.avatar} alt={data.name} style={{ width: 50, height: 50, borderRadius: '50%'}} />
-  <h2>{data.name}</h2>
-  <p>{data.bio}</p>
-  </div> 
-);
-}
+}, []); 
 
   return (
     <section id="section-items" className="no-bottom">

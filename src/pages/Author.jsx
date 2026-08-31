@@ -1,35 +1,14 @@
 import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
-import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
+import AuthorItems from "../components/author/AuthorItems"; 
 import AuthorImage from "../images/author_thumbnail.jpg";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
-function ProfileCard({ isLoading, data }) {
-  if( isLoading ) {
-    return (
-    <div className="card">
-      <Skeleton circle width={50} height={50} />
-      <h2><Skeleton width={150} /></h2>
-      <p><Skeleton count={3} /></p>
-    </div>
-    );
-  }
-
-return (
-  <div className="card">
-  <img src={data.avatar} alt={data.name} style={{ width: 50, height: 50, borderRadius: '50%'}} />
-  <h2>{data.name}</h2>
-  <p>{data.bio}</p>
-  </div> 
-);
-}
+import "react-loading-skeleton/dist/skeleton.css"; 
 
 const Author = () => { 
-const [author, setAuthor] = useState([]);
+const [setAuthor] = useState([]);
 const [isFollowing, setIsFollowing] = useState(false);
-const [isLoading, setIsLoading] = useState(true);
+const [setIsLoading] = useState(true);
 
   function handleFollow() {
   setIsFollowing(!isFollowing);
