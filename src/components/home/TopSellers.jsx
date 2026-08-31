@@ -62,7 +62,7 @@ function ProfileCard({ isLoading, data }) {
   }
 
 return (
-  <div className="card">
+  <div className="d-flex" style={{alignItems: "flex-start", flexDirection: "column"}}>
 <img src={data.authorImage} alt={data.authorName} style={{width: "50px", height: "50px", minWidth: "50px", minHeight: "50px", borderRadius: "50%", ojectFit: "cover", display: "inline-block", }} />
 <h2>{data.authorName}</h2>
 <p>{data.price} ETH</p>
