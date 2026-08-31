@@ -98,7 +98,7 @@ const ExploreItems = () => {
                   <div className="nft__item_buttons">
                     <button>Buy Now</button>
                     <div className="nft__item_share">
-                      <h4>Share</h4>
+                      <h4 data-aos="fade-left">Share</h4>
                       <a href="" target="_blank" rel="noreferrer">
                         <i className="fa fa-facebook fa-lg"></i>
                       </a>
