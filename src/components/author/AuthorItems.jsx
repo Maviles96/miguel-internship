@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import nftImage from "../../images/nftImage.jpg"; 
-import AuthorImage from "../components/ui/AuthorImage";
 
 const AuthorItems = () => {
   return (
@@ -12,8 +11,7 @@ const AuthorItems = () => {
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
-                  <Link to="">
-                    <img className="lazy" src={AuthorImage} alt="" />
+                  <Link to=""> 
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
