@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"; 
 import Skeleton from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
-
+import TopSeller from "./TopSeller"; 
 
 const TopSellers = () => {
   const [sellers, setSellers] = useState([]); 
@@ -38,7 +38,13 @@ fetchTopSellers();
             <ol className="author_list">
              {sellers.map((seller, index)=> (
                <li key={index}>
-            <ProfileCard data={seller} isLoading={!sellers.length}/>
+           <TopSeller
+            key={seller.id}
+            authorImage={seller.authorImage}
+            authorName={seller.authorName}
+            authorId={seller.authorId}
+           price={seller.price}
+          />
             </li>
               ))}
             </ol>
