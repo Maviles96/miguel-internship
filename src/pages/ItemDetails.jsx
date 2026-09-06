@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
-import nftImage from "../images/nftImage.jpg";
-import Skeleton from "react-loading-skeleton";
+import nftImage from "../images/nftImage.jpg" 
 import "react-loading-skeleton/dist/skeleton.css"; 
 
 const ItemDetails = () => {
@@ -13,8 +12,7 @@ const ItemDetails = () => {
 
   useEffect(() => { 
   window.scrollTo(0, 0);
-
-
+ 
  const fetchItemDetails = async () => {
 
 const response = await fetch(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`);

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; 
-import nftImage from "../../images/nftImage.jpg";
-import Skeleton from 'react-loading-skeleton';
-import "react-loading-skeleton/dist/skeleton.css";
+import "react-loading-skeleton/dist/skeleton.css"; 
 
 const NewItems = () => {
   const [items, setItems] = useState([]);

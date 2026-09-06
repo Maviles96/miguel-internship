@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems"; 
 import AuthorImage from "../images/author_thumbnail.jpg";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; 
 
 const Author = () => { 
