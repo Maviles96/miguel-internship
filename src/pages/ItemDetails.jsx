@@ -8,7 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const ItemDetails = () => {
 
   const { id } = useParams();
-  const [setItemDetails] = useState({});
+ const [itemDetails, setItemDetails] = useState({});
 
   useEffect(() => { 
   window.scrollTo(0, 0);

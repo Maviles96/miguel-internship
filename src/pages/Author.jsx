@@ -5,7 +5,7 @@ import AuthorImage from "../images/author_thumbnail.jpg";
 import "react-loading-skeleton/dist/skeleton.css"; 
 
 const Author = () => { 
-const [setAuthor] = useState([]);
+const [author, setAuthor] = useState([]);
 const [isFollowing, setIsFollowing] = useState(false);
 const [setIsLoading] = useState(true);
 
