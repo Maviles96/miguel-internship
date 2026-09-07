@@ -4,11 +4,22 @@ import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg" 
 import "react-loading-skeleton/dist/skeleton.css"; 
+import './App.css';
+
+ function CardSkeleton() {
+  return (
+    <div className="card-placeholder" style={{ padding: '20px', border: '1px solid #ccc' }}>
+      <div className="skeleton-box" style={{ width: '60px', height: '60px', borderRadius: '50%', marginBottom: '15px' }} />
+      <div className="skeleton-box" style={{ width: '70%', height: '24px', marginBottom: '10px' }} />
+      <div className="skeleton-box" style={{ width: '100%', height: '16px' }} />
+    </div>
+  );
+}
 
 const ItemDetails = () => {
 
   const { id } = useParams();
- const [,setItemDetails] = useState({});
+ const [itemDetails,setItemDetails] = useState(null);
 
   useEffect(() => { 
   window.scrollTo(0, 0);
@@ -29,6 +40,10 @@ fetchItemDetails();
 
   }, [id]);
 
+  if (!itemDetails) {
+  return <CardSkeleton />;
+}
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -38,7 +53,7 @@ fetchItemDetails();
             <div className="row">
               <div className="col-md-6 text-center">
                 <img
-                  src={nftImage}
+                  src={AuthorImage}
                   className="img-fluid img-rounded mb-sm-30 nft-image"
                   alt=""
                 />
@@ -68,7 +83,7 @@ fetchItemDetails();
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
+                            <img className="lazy" src={itemDetails.authorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>

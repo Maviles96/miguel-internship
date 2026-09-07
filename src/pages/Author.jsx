@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems"; 
 import AuthorImage from "../images/author_thumbnail.jpg";
-import "react-loading-skeleton/dist/skeleton.css"; 
+import "react-loading-skeleton/dist/skeleton.css";
+import { useParams } from "react-router-dom" 
 
 const Author = () => { 
-const [,setAuthor] = useState([]);
+const [author,setAuthor] = useState(null);
 const [isFollowing, setIsFollowing] = useState(false);
-const [,setIsLoading] = useState(true);
+const [isLoading,setIsLoading] = useState(true);
+const {id} = useParams();
 
   function handleFollow() {
   setIsFollowing(!isFollowing);
@@ -17,7 +19,7 @@ useEffect(() => {
 
 const fetchAuthor = async () => {
 
-const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012");
+const response = await fetch(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`);
 
 const data = await response.json();
 setAuthor(data);
@@ -51,7 +53,7 @@ fetchAuthor();
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
+                      <img src={author.authorImage} alt="" />
 
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
