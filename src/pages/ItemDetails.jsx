@@ -25,6 +25,7 @@ const ItemDetails = () => {
   window.scrollTo(0, 0);
  
  const fetchItemDetails = async () => {
+console.log("NFT ID:", id); 
 
 const response = await fetch(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`);
 
