@@ -35,16 +35,14 @@ fetchTopSellers();
           </div>
           <div className="col-md-12">
             <ol className="author_list">
-             {sellers.map((seller, index)=> (
-               <li key={index}>
+             {sellers.map((seller, index)=> ( 
            <TopSeller
             key={seller.id}
             authorImage={seller.authorImage}
             authorName={seller.authorName}
             authorId={seller.authorId}
            price={seller.price}
-          />
-            </li>
+          /> 
               ))}
             </ol>
           </div>
