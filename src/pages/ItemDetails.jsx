@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
-import nftImage from "../images/nftImage.jpg" 
+import AuthorImage from "../images/author_thumbnail.jpg"; 
 import "react-loading-skeleton/dist/skeleton.css";  
 
  function CardSkeleton() {
