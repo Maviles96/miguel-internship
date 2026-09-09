@@ -25,15 +25,21 @@ const ItemDetails = () => {
  const fetchItemDetails = async () => {
 console.log("NFT ID:", id); 
 
-const response = await fetch(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`);
+const response = await fetch(
+  "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
+);
 
-const data = await response.json();
-setItemDetails(data);
+const data = await response.json(); 
 
+const selectedItem = data.find(
+  (item) => item.id === Number(id)
+);
 
-console.log(data); 
+setItemDetails(selectedItem);
 
-};
+console.log(selectedItem);
+
+ }
 
 fetchItemDetails();
 

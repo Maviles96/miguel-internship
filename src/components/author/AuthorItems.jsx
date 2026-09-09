@@ -32,19 +32,19 @@ const AuthorItems = () => {
                         </a>
                       </div>
                     </div>
-                  </div>
-                  <Link to="/item-details">
+                  </div> 
+
                     <img
                       src={nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
-                  </Link>
+                  
                 </div>
-                <div className="nft__item_info">
-                  <Link to="/item-details">
+                <div className="nft__item_info"> 
+                  
                     <h4>Pinky Ocean</h4>
-                  </Link>
+                  
                   <div className="nft__item_price">2.52 ETH</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
