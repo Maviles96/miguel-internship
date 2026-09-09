@@ -65,7 +65,7 @@ fetchItemDetails();
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>Rainbow Style #194</h2>
+                  <h2>{itemDetails.title} #194</h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
