@@ -58,9 +58,9 @@ fetchItemDetails();
             <div className="row">
               <div className="col-md-6 text-center">
                 <img
-                  src={AuthorImage}
+                  src={itemDetails.nftImage}
                   className="img-fluid img-rounded mb-sm-30 nft-image"
-                  alt=""
+                  alt="" 
                 />
               </div>
               <div className="col-md-6">
