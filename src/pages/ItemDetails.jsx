@@ -65,7 +65,7 @@ fetchItemDetails();
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>{itemDetails.title} {itemDetails.nftId}</h2>
+                  <h2>{itemDetails.title} #{itemDetails.nftId}</h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
