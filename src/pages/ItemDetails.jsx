@@ -2,29 +2,28 @@ import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
-import "react-loading-skeleton/dist/skeleton.css";
-import './SkeletonCard.css';
-
+import "react-loading-skeleton/dist/skeleton.css"; 
+import Skeleton from "react-loading-skeleton";
 
 function SkeletonCard() {
   return (
-    <Box sx={{ display: 'flex', gap: 3, p: 2, border: '1px solid #e5e7eb', borderRadius: 3, maxWidth: 600 }}>
+    <div sx={{ display: 'flex', gap: 3, p: 2, border: '1px solid #e5e7eb', borderRadius: 3, maxWidth: 600 }}>
 
-      <Box>
+      <div>
         <Skeleton variant="rectangular" width={120} height={120} sx={{ borderRadius: 1.5 }} />
-      </Box>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, flexGrow: 1 }}>
+      <div sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, flexGrow: 1 }}>
         <Skeleton variant="text" width="100%" height={24} />
         <Skeleton variant="text" width="60%" height={24} />
 
-        <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
+        <div sx={{ display: 'flex', gap: 1, mt: 1 }}>
           <Skeleton variant="circular" width={32} height={32} />
           <Skeleton variant="circular" width={32} height={32} />
           <Skeleton variant="circular" width={32} height={32} />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -63,10 +62,13 @@ const ItemDetails = () => {
           `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`,
         );
 
-        const data = await response.json();
+       console.log(response.status);
+       console.log(response.url);  
 
-        setItemDetails(data);
-        console.log(data);
+       const text = await response.text();
+       console.log(text);
+
+    
       } catch (error) {
         setError(true);
         console.log("Error in Item Details: ", error);
@@ -78,13 +80,17 @@ const ItemDetails = () => {
     fetchItemDetails();
   }, [id]);
 
-  if (!itemDetails) {
-    return <CardSkeleton />;
+  if (loading) {
+    return <SkeletonCard />;
   }
 
   if (error) {
     return <ErrorComponent />;
   }
+  if(!itemDetails) {
+    return null;
+  }
+
   // ADD SKELETON LOADING STATE
   return (
     <div id="wrapper">
