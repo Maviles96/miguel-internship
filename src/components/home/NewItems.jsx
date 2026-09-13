@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
-import "react-loading-skeleton/dist/skeleton.css"; 
+import { Link } from "react-router-dom";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
-useEffect(() => {
+  useEffect(() => {
+    const fetchNewItems = async () => {
+      const response = await fetch(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+      );
 
-const fetchNewItems = async () => {
+      const data = await response.json();
 
-const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
+      console.log(data);
 
-const data = await response.json();
+      setItems(data);
+    };
 
-console.log(data);
-
-setItems(data);
-
-};
-
-fetchNewItems();
-
-}, []); 
+    fetchNewItems();
+  }, []);
 
   return (
     <section id="section-items" className="no-bottom">
@@ -67,7 +65,7 @@ fetchNewItems();
                     </div>
                   </div>
 
-                  <Link to={`/item/${item.id}`}>
+                  <Link to={`/item/${item.nftId}`}>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
@@ -76,7 +74,7 @@ fetchNewItems();
                   </Link>
                 </div>
                 <div className="nft__item_info">
-                  <Link to={`/item/${item.id}`}>
+                  <Link to={`/item/${item.nftId}`}>
                     <h4>{item.title}</h4>
                   </Link>
                   <div className="nft__item_price">{item.price} ETH</div>
@@ -94,4 +92,4 @@ fetchNewItems();
   );
 };
 
-export default NewItems;
+export default NewItems; 
