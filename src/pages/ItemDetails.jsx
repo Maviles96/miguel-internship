@@ -59,19 +59,24 @@ const ItemDetails = () => {
     const fetchItemDetails = async () => {
       try {
         const response = await fetch(
-          `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`,
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
         );
 
        console.log(response.status);
        console.log(response.url);  
 
-       const text = await response.text();
-       console.log(text);
+      const data = await response.json();
+
+      const selectedItem = data.find((item) => String(item.id) === String(id) || String(item.nftId) === String(id));
+    
+      setItemDetails(selectedItem); 
+       
+       
 
     
       } catch (error) {
         setError(true);
-        console.log("Error in Item Details: ", error);
+        console.error("Error in Item Details: ", error);
       } finally {
         setLoading(false);
       }
@@ -135,7 +140,7 @@ const ItemDetails = () => {
                           <Link to="/author">
                             <img
                               className="lazy"
-                              src={itemDetails.ownerImage}
+                             src={itemDetails.ownerImage || itemDetails.authorImage || AuthorImage}
                               alt=""
                             />
                             <i className="fa fa-check"></i>
@@ -148,7 +153,7 @@ const ItemDetails = () => {
                     </div>
                     <div></div>
                   </div>
-                  <div className="de_tab tab_simple">
+                  <div className="de_tab tab_simple" style={{ marginTop: "20px" }}>
                     <div className="de_tab_content">
                       <h6>Creator</h6>
                       <div className="item_author">
@@ -156,7 +161,7 @@ const ItemDetails = () => {
                           <Link to="/author">
                             <img
                               className="lazy"
-                              src={itemDetails.creatorImage}
+                              src={itemDetails.creatorImage || itemDetails.authorImage || AuthorImage}
                               alt=""
                             />
                             <i className="fa fa-check"></i>
