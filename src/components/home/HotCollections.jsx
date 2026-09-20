@@ -11,35 +11,9 @@ import "slick-carousel/slick/slick-theme.css";
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
 
-  function ProfileCard({ isLoading, data }) {
-    if (isLoading) {
-      return (
-        <div className="card">
-          <Skeleton circle width={50} height={50} />
-          <h2>
-            <Skeleton width={150} />
-          </h2>
-          <p>
-            <Skeleton count={3} />
-          </p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="card">
-        <img
-          src={data.avatar}
-          alt={data.name}
-          style={{ width: 50, height: 50, borderRadius: "50%" }}
-        />
-        <h2>{data.name}</h2>
-        <p>{data.bio}</p>
-      </div>
-    );
-  }
+ 
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -160,7 +134,7 @@ const HotCollections = () => {
         </div>
       </div>
     </section>
-  );
+  ); 
 };
 
 export default HotCollections;
