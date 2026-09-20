@@ -5,6 +5,8 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
@@ -74,6 +76,7 @@ const HotCollections = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -91,8 +94,22 @@ const HotCollections = () => {
   };
 
   if (loading) {
-    return <ProfileCard isLoading={true} />;
-  }
+  return (
+    <section id="section-collections" className="no-bottom">
+      <div className="container">
+        <div className="row">
+          {new Array(4).fill(0).map((_, index) => (
+            <div className="col-lg-3 col-md-6" key={index}>
+              <Skeleton height={250} />
+              <Skeleton circle width={50} height={50} />
+              <Skeleton width="70%" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
   if (error) return <div>Error: {error}</div>;
   if (collections.length === 0) return null;
 
@@ -121,7 +138,7 @@ const HotCollections = () => {
                     </Link>
                   </div>
                   <div className="nft_coll_pp">
-                    <Link to={`/author/${item.authorId}`}>
+                    <Link to="/explore">
                       <img
                         className="lazy pp-coll"
                         src={item.authorImage || AuthorImage}

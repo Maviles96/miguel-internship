@@ -3,6 +3,7 @@ import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";  
 import "react-loading-skeleton/dist/skeleton.css";
 import { useParams } from "react-router-dom" 
+import Skeleton from "react-loading-skeleton";
 
 const Author = () => { 
 const [author,setAuthor] = useState(null);
@@ -31,6 +32,10 @@ console.log(data);
 fetchAuthor();
 
 }, [id]); 
+
+if (!author) {
+  return <Skeleton height={500} />;
+}
 
   return (
     <div id="wrapper">
