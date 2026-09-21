@@ -6,6 +6,7 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
+   const [search, setSearch] = useState("");
    const [explore, setExplore] = useState([]);
    const [visibleCount, setVisibleCount] = useState(8);
    const [isLoading, setIsLoading] = useState(true);
@@ -50,11 +51,21 @@ const ExploreItems = () => {
     fetchExploreItems();
   }, []);
 
-  const visibleItems = explore.slice(0, visibleCount);
+  const visibleItems = explore
+  .filter((item) =>
+    item.title?.toLowerCase().includes(search.toLowerCase())
+  )
+  .slice(0, visibleCount);
 
   return (
     <>
       <div>
+        <input
+        type="text"
+        placeholder="Search items..."
+        value={search}
+        onChange={(event) => setSearch(event.target.value)} 
+        />
         <select 
           id="filter-items" 
           defaultValue=""

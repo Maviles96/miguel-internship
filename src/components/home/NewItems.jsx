@@ -2,6 +2,48 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
 
+const Countdown = ({ deadline }) => {
+  const [timeLeft, setTimeLeft] = useState('');
+   
+  useEffect(() => {
+    const targetDate = new Date(deadline).getTime();
+    
+    const formatTime = (seconds) => {
+      let hoursLeft = Math.floor(seconds / 3600);
+      let minutesLeft = Math.floor((seconds % 3600) / 60);
+      let secondsLeft = seconds % 60;
+  
+      minutesLeft = minutesLeft.toString().padStart(2, '0');
+      secondsLeft = secondsLeft.toString().padStart(2, '0');
+      
+      return `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
+    };
+    const countDown = setInterval(() => {
+      const now = Date.now();
+      const secondsLeft = Math.floor((targetDate - now) / 1000);
+
+      if (secondsLeft <= 0) {
+        clearInterval(countDown);
+        setTimeLeft("Expired");
+        console.log('done!');
+        return;
+      }
+      setTimeLeft(formatTime(secondsLeft));
+    }, 1000);
+    return () => clearInterval(countDown);
+    
+  }, [deadline]); 
+
+    return (
+    <div className="de_countdown">
+      {timeLeft}
+    </div>
+  );  
+};
+
+
+
+
 const NewItems = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -12,7 +54,8 @@ const NewItems = () => {
 
       const data = await response.json();
 
-      console.log(data);
+      console.log(Object.keys(data[0]));
+      console.log(data[0].expiryDate);
 
       setItems(data);
     };
@@ -44,8 +87,9 @@ const NewItems = () => {
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
-
+                <Countdown
+                deadline= {item.expiryDate} />
+                 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
                     <div className="nft__item_buttons">
