@@ -27,6 +27,7 @@ const HotCollections = () => {
         }
         const data = await response.json();
         const collectionItems = Array.isArray(data) ? data : data.value;
+        console.log(collectionItems[0]);
 
         if (!Array.isArray(collectionItems)) {
           throw new Error("Invalid collections response");
@@ -112,7 +113,7 @@ const HotCollections = () => {
                     </Link>
                   </div>
                   <div className="nft_coll_pp">
-                    <Link to="/explore">
+                    <Link to={`/author/${item.authorId}`}>
                       <img
                         className="lazy pp-coll"
                         src={item.authorImage || AuthorImage}

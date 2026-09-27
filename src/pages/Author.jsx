@@ -79,7 +79,7 @@ if (!author) {
                       <div className="profile_follower">
                          {573 + (isFollowing ? 1 : 0)} followers
                       </div>
-                      <button onClick={handleFollow}>
+                      <button className="follow__btn" onClick={handleFollow}>
                       {isFollowing ? "Unfollow" : "Follow"}
                       </button> 
                     </div>

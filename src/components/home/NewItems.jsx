@@ -46,6 +46,20 @@ const Countdown = ({ deadline }) => {
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const nextSlide = () => {
+  setCurrentIndex((prevIndex) =>
+    prevIndex >= items.length - 4 ? 0 : prevIndex + 1
+  );
+};
+
+const prevSlide = () => {
+  setCurrentIndex((prevIndex) =>
+    prevIndex === 0 ? Math.max(items.length - 4, 0) : prevIndex - 1
+  );
+};
+
   useEffect(() => {
     const fetchNewItems = async () => {
       const response = await fetch(
@@ -55,8 +69,7 @@ const NewItems = () => {
       const data = await response.json();
 
       console.log(Object.keys(data[0]));
-      console.log(data[0].expiryDate);
-
+      console.log(data[0].expiryDate); 
       setItems(data);
     };
 
@@ -73,7 +86,16 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {items.slice(0, 4).map((item, index) => (
+          <div className="new-items__controls">
+          <button type="button" onClick={prevSlide} aria-label="Previous items">
+          <i className="fa fa-chevron-left"></i>
+          </button>
+
+         <button type="button" onClick={nextSlide} aria-label="Next items">
+          <i className="fa fa-chevron-right"></i>
+          </button>
+          </div>
+          {items.slice(currentIndex, currentIndex + 4).map((item, index) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">

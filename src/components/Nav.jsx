@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../images/Ultraverse.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
 const Nav = () => {
+  const [search, setSearch] = useState("");
+const navigate = useNavigate();
+
+const handleSearch = (event) => {
+  if (event.key === "Enter" && search.trim()) {
+    navigate(`/explore?search=${encodeURIComponent(search.trim())}`);
+  }
+};
   const openNav = () => {
     document.body.classList += "menu__open";
   };
@@ -28,12 +36,15 @@ const Nav = () => {
                 </div>
                 <div className="de-flex-col">
                   <input
-                    id="quick_search"
-                    className="xs-hide"
-                    name="quick_search"
-                    placeholder="search item here..."
-                    type="text"
-                  />
+                 id="quick_search"
+                 className="xs-hide"
+                 name="quick_search"
+                placeholder="search item here..."
+                type="text"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+               onKeyDown={handleSearch}
+               />
                 </div>
               </div>
               <div className="de-flex-col header-col-mid">
@@ -92,3 +103,4 @@ const Nav = () => {
 };
 
 export default Nav;
+

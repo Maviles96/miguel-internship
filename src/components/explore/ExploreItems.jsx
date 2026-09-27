@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
-   const [search, setSearch] = useState("");
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("search") || "";
+
+   const [search, setSearch] = useState("query");
    const [explore, setExplore] = useState([]);
    const [visibleCount, setVisibleCount] = useState(8);
    const [isLoading, setIsLoading] = useState(true);
