@@ -6,8 +6,7 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get("search") || "";
+  const [searchParams] = useSearchParams(); 
 
    const [search, setSearch] = useState("query");
    const [explore, setExplore] = useState([]);
