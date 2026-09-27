@@ -7,7 +7,7 @@ import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => { 
 
-   const [search, setSearch] = useState("query");
+   const [search, setSearch] = useState("");
    const [explore, setExplore] = useState([]);
    const [visibleCount, setVisibleCount] = useState(8);
    const [isLoading, setIsLoading] = useState(true);
@@ -126,12 +126,12 @@ const ExploreItems = () => {
                     </div>
                   </div>
                 </div>
-                <Link to={`/item/${item.id}`}>
+                <Link to={`/item/${item.nftId}`}> 
                   <img src={item.nftImage || nftImage} className="lazy nft__item_preview" alt="" />
                 </Link>
               </div>
               <div className="nft__item_info">
-                <Link to={`/item/${item.id}`}>
+                <Link to={`/item/${item.nftId}`}>
                   <h4>{item.title || "Pinky Ocean"}</h4>
                 </Link>
                 <div className="nft__item_price">{item.price} ETH</div>
