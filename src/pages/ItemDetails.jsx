@@ -59,7 +59,7 @@ const ItemDetails = () => {
     const fetchItemDetails = async () => {
       try {
         const response = await fetch(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
         );
 
        console.log(response.status);
