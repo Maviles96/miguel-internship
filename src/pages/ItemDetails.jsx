@@ -53,27 +53,15 @@ const ItemDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
+   useEffect(() => {
+    window.scrollTo(0, 0); 
     const fetchItemDetails = async () => {
       try {
-        const response = await fetch(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-        );
-
-       console.log(response.status);
-       console.log(response.url);  
-
+        const response = await fetch( 
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`
+        ); 
       const data = await response.json();
-
-      const selectedItem = data.find((item) => String(item.id) === String(id) || String(item.nftId) === String(id));
-    
-      setItemDetails(selectedItem); 
-       
-       
-
-    
+      setItemDetails(data); 
       } catch (error) {
         setError(true);
         console.error("Error in Item Details: ", error);
@@ -81,9 +69,8 @@ const ItemDetails = () => {
         setLoading(false);
       }
     };
-
-    fetchItemDetails();
-  }, [id]);
+    fetchItemDetails(); 
+  }, [id]); 
 
   if (loading) {
     return <SkeletonCard />;
