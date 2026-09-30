@@ -89,7 +89,10 @@ if (!author) {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems
+                  items={author.nftCollection}
+                  authorImage={author.authorImage}
+                  />
                 </div>
               </div>
             </div>
