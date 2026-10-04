@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
+import Slider from "react-slick";
 
 const Countdown = ({ deadline }) => {
   const [timeLeft, setTimeLeft] = useState('');
@@ -46,19 +47,9 @@ const Countdown = ({ deadline }) => {
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   
-  const nextSlide = () => {
-  setCurrentIndex((prevIndex) =>
-    prevIndex >= items.length - 4 ? 0 : prevIndex + 1
-  );
-};
-
-const prevSlide = () => {
-  setCurrentIndex((prevIndex) =>
-    prevIndex === 0 ? Math.max(items.length - 4, 0) : prevIndex - 1
-  );
-};
+  
+  
 
   useEffect(() => {
     const fetchNewItems = async () => {
@@ -76,6 +67,29 @@ const prevSlide = () => {
     fetchNewItems();
   }, []);
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 576,
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -86,17 +100,9 @@ const prevSlide = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="new-items__controls">
-          <button type="button" onClick={prevSlide} aria-label="Previous items">
-          <i className="fa fa-chevron-left"></i>
-          </button>
-
-         <button type="button" onClick={nextSlide} aria-label="Next items">
-          <i className="fa fa-chevron-right"></i>
-          </button>
-          </div>
-          {items.slice(currentIndex, currentIndex + 4).map((item, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          
+             <Slider {...sliderSettings}>
+             {items.map((item, index) => (
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
@@ -130,8 +136,7 @@ const prevSlide = () => {
                       </div>
                     </div>
                   </div>
-
-                  <Link to={`/item/${item.nftId}`}>
+                 <Link to={`/item/${item.nftId}`}>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
@@ -150,8 +155,8 @@ const prevSlide = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+             ))}
+             </Slider>
         </div>
       </div>
     </section>
