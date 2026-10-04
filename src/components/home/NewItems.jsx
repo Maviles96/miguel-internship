@@ -102,8 +102,10 @@ const NewItems = () => {
           </div>
           
              <Slider {...sliderSettings}>
-             {items.map((item, index) => (
-              <div className="nft__item">
+             {items.map((item) => (
+              <div className="px-2" key={item.id || item.nftId}>
+               <div className="nft__item">
+              
                 <div className="author_list_pp">
                   <Link
                     to={`/author/${item.authorId}`}
@@ -117,7 +119,7 @@ const NewItems = () => {
                 </div>
                 <Countdown
                 deadline= {item.expiryDate} />
-                 
+    
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
                     <div className="nft__item_buttons">
@@ -155,6 +157,7 @@ const NewItems = () => {
                   </div>
                 </div>
               </div>
+              </div> 
              ))}
              </Slider>
         </div>
